@@ -1,0 +1,20 @@
+#productsContainer {
+    background-color: #FDFCFD;
+    padding: 1rem;
+    color: #000000d0;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: auto;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0px 0px 8px 0px #00000072;
+}
+  
+
+.productsContainer div.card-body{
+    padding-bottom:10px; 
+    padding-top: 10px; 
+    border-top: 1px solid #ddd;
+    color:white;
+    background-color: #325ea0!important;
+}

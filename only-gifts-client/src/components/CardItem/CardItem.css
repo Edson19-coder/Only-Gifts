@@ -1,0 +1,27 @@
+.card-footer{
+    background-color: white;
+}
+
+span.badge.badge-primary{
+    background-color: var(--main-color-hard) !important;
+}
+
+span.price{
+    color:#1aa00e
+}
+
+.product{
+    transition: .2s;
+    width: 18rem;
+    margin: .6rem;
+    box-shadow: 0px 0px 8px 0px #00000072;
+}
+
+.product:hover {
+    transition: .2s;
+    width: 19rem;
+}
+
+.productFooter {
+    text-align: center;
+}
