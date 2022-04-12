@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Carousel, Row, CardGroup } from 'react-bootstrap';
+import { Carousel, Row, CardGroup, Col } from 'react-bootstrap';
 import CardItem from '../../components/CardItem/CardItem';
 
 import './Home.css';
@@ -31,7 +31,7 @@ const Home = () => {
         </Carousel.Item>
       </Carousel>
     
-      <Container id="productsContainer">
+      <div id="productsContainer">
         <br/>
         <h1>Productos más nuevos</h1>
         <hr/>
@@ -39,12 +39,12 @@ const Home = () => {
         <Row id="products">
         <CardGroup>
           {Array.from({ length: 6 }).map((_, idx) => (
-              <CardItem></CardItem>
+                <CardItem></CardItem>
           ))}
         </CardGroup>
         </Row>
 
-      </Container>
+      </div>
     </div>
   )
 }

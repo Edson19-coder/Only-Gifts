@@ -4,6 +4,7 @@
     --main-color: #f4949caa;
     --main-color-soft: #ffecec;
     --main-color-hard: #f4949c;
+    --main-color-white: #FDFCFD;
 }
 
 body {
@@ -29,6 +30,7 @@ a, a:hover {
 /* NAVBAR */
 
 .BgCustom {
+    padding: .5rem 1rem;
     background-color: var(--main-color-soft) !important;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -69,3 +71,21 @@ a, a:hover {
     margin-left: .5rem;
 }
 
+#my-account {
+    color: #0000008c;
+    border-color: #0000008c;
+    background-color: #ffffff00;
+}
+
+#my-account:hover {
+    color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+    border-color: var(--main-color);
+    background-color: var(--main-color);
+}
+
+#my-account:focus, #my-account:active {
+    color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+    border-color: var(--main-color);
+    background-color: var(--main-color);
+    box-shadow: 0px 0px 4px 4px #f4949c8a;
+}

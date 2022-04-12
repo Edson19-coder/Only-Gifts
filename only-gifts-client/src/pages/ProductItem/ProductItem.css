@@ -1,0 +1,43 @@
+table {
+    display: table !important;
+}
+
+tbody {
+    display: table-row-group !important;
+    vertical-align: middle !important;
+    border-color: inherit !important;
+}
+
+#prd-container {
+    margin: 2rem 1rem;
+}
+
+#productInfo {
+    padding: 1rem;
+}
+
+#productCharacteristics tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+#productPrice {
+    font-size: 2rem;
+}
+
+#amountProduct {
+    margin-left: .5rem;
+    margin-bottom: .8rem;
+}
+
+#ButtonAddCar {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+    width: 100%;
+}
+
+#ButtonAddCar:hover {
+    background-color: #f4949c80;
+    border-color: #f4949c80;
+}
