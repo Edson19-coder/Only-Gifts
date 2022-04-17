@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 			throw new ResourceNotFoundException("User", "password", userRequest.getEmail());
 		}
 		
-		String token = GetJwtToken.getJWTToken(user.get().getEmail());
+		String token = GetJwtToken.getJWTToken(user.get().getEmail(), user.get().getRole());
 		System.out.println(token);
 		
 		return user.get();
