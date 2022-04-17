@@ -104,10 +104,10 @@ public class ProductRepositoryImpl implements ProductRepository {
 		setParameter(4, "").
 		setParameter(5, "").
 		setParameter(6, "").
-		setParameter(7, "").
+		setParameter(7, -1).
 		setParameter(8, "").
 		setParameter(9, "").
-		setParameter(10, "");
+		setParameter(10, -1);
 		query.execute();
 		try {
 			log.info(null, query.getFirstResult());
@@ -136,10 +136,10 @@ public class ProductRepositoryImpl implements ProductRepository {
 		setParameter(4, "").
 		setParameter(5, "").
 		setParameter(6, "").
-		setParameter(7, "").
+		setParameter(7, -1).
 		setParameter(8, "A").
 		setParameter(9, "").
-		setParameter(10, "");
+		setParameter(10, -1);
 		query.execute();
 		@SuppressWarnings("unchecked")
 		List<Object[]> rptTrx = query.getResultList();
@@ -165,10 +165,10 @@ public class ProductRepositoryImpl implements ProductRepository {
 		setParameter(4, "").
 		setParameter(5, "").
 		setParameter(6, "").
-		setParameter(7, "").
+		setParameter(7, -1).
 		setParameter(8, "A").
 		setParameter(9, "").
-		setParameter(10, "");
+		setParameter(10, -1);
 		query.execute();
 		@SuppressWarnings("unchecked")
 		List<Object[]> rptTrx = query.getResultList();
@@ -197,7 +197,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 		setParameter(7, request.getCategory()).
 		setParameter(8, "A").
 		setParameter(9, "").
-		setParameter(10, "");
+		setParameter(10, -1);
 		query.execute();
 		@SuppressWarnings("unchecked")
 		List<Object[]> rptTrx = query.getResultList();

@@ -22,7 +22,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         .and()
 		.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 		.authorizeRequests()
-		.antMatchers("/api/user", "/users", "/api/user/SignIn").permitAll()
+		.antMatchers
+		(
+			"/api/user", 
+			"/api/user/SignIn",
+			"/api/get-product",
+			"/api/get-products"
+		).
+		permitAll()
         .antMatchers("/api/manager/*").hasRole("MANAGER")
 		.anyRequest().authenticated();
 	}

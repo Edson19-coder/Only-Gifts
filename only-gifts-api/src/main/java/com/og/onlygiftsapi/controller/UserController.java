@@ -40,9 +40,4 @@ public class UserController {
 		User user = userService.getUserByEmail(userRequest);
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
-	
-	@GetMapping(value = "/users")
-	public String getUsers() {
-		return "Hola";
-	}
 }
