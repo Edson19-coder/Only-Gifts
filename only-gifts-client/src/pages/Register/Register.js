@@ -42,8 +42,10 @@ const Register = () => {
               </InputGroup>
 
               <InputGroup size="lg" className="mb-3" className="formControl">
-                <Button id="btnSignIn">Registrarse</Button>
+                <Button id="btnSign">Registrarse</Button>
               </InputGroup>
+
+              <a href="/login" id="registerAccount" >Ingresar</a>
 
             </Form>
             

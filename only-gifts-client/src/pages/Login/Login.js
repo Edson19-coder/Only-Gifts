@@ -34,8 +34,10 @@ const Login = () => {
               </InputGroup>
 
               <InputGroup size="lg" className="mb-3" className="formControl">
-                <Button id="btnSignIn">Ingresar</Button>
+                <Button id="btnSign">Ingresar</Button>
               </InputGroup>
+
+              <a href="/register" id="registerAccount">Registrarse</a>
 
               <div className="formControl">
                 <p className="softText" >¿Olvidaste tu contraseña?</p>

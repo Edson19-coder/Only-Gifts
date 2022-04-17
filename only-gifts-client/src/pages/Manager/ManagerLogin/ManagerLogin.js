@@ -1,7 +1,12 @@
 import React,{useState,useContext} from "react";
-import imgLogo from "./../../assets/logo.png";
+import { Button, Form, InputGroup } from 'react-bootstrap';
+import logo from '../../src/logo.png';
 import { useNavigate } from "react-router-dom";
-import ContextAdmin from "./../../context/AdminContext";
+import ContextAdmin from "../../../context/AdminContext";
+
+import { MdEmail, MdPassword } from "react-icons/md";
+
+import './ManagerLogin.css';
 
 const AdminLogin = () => {
 
@@ -14,51 +19,47 @@ const AdminLogin = () => {
     e.preventDefault();
     //implementar con service/api
     logIn(user);
-    navigate("/admin")
+    navigate("/manager/home")
   }
 
   return (
     <>
-      <div className="bg-light w-screen h-screen m_bg">
-        <div className="d-flex flex-column full align-items-center justify-content-center">
-          <div className="shadow-sm bg-white rounded-3 p-4">
-            <div className="text-center " >
-            <img src={imgLogo} alt="logo" className="w-logo mb-3" ></img>
-            <div className="h5 mb-0 "> ¡Bienvenido de nuevo!</div>
-            <div style={{fontSize:"0.7rem"}} className="text-muted mb-3" >Entra con tu cuenta de TECH MARKET </div>
-            </div>
-            <form onSubmit={handleForm} className="form-admin" >
-              <div className="mb-3">
-                <label className="form-label" htmlFor="form1Example1">
-                  Usuario
-                </label>
-                <input onChange={(e)=>setUser(e.target.value)} name="user" value={user} type="text" id="user" className="form-control" />
+      <div className="container-fluid">
+        <div className="container-sm items-align-center text-center col-6" id="container-global">
+          <img
+            src={logo}
+            alt=""
+            width="150"
+            height="150"
+            className="d-inline-block align-text-top"/>
+
+            <div className="container-sm items-align-center text-center col-12" id="container-form">
+              <br/>
+              <h3>Bienvenido de nuevo</h3>
+              <p className="softText" >Ingresa tus datos para acceder a tu cuenta de manager.</p>
+
+              <form onSubmit={handleForm}>
+                <div className="formControl input-group">
+                  <span className="input-group-text" id="basic-addon1"><MdEmail/></span>
+                  <input placeholder="Correo electrónico" type="email" className="form-control form-control-lg" onChange={(e)=>setUser(e.target.value)} value={user} />
+                </div>
+
+                <div className="formControl input-group">
+                  <span className="input-group-text" id="basic-addon1"><MdPassword/></span>
+                  <input placeholder="Contraseña" type="password" className="form-control form-control-lg" onChange={(e)=>{setPassword(e.target.value)}} value={password} />
+                </div>
                 
-              </div>
-
-              <div className="mb-3">
-              <label className="form-label" htmlFor="form1Example2">
-                  Contraseña
-                </label>
-                <input
-                value={password}
-                onChange={(e)=>{setPassword(e.target.value)}}
-                  type="password"
-                  id="password" name="password"
-                  className="form-control"
-                />
-               
-              </div>
-
-              <div className="d-grid">
-              <button type="submit" className="btn btn-primary  ">
-                Entrar
-              </button>
-              </div>
-            </form>
-          </div>
-          <a href="" > ¿Olvidaste tu contraseña?  </a>
-         
+                <div className="formControl input-group input-group-lg">
+                  <button type="submit" id="btnSignIn" className="btn btn-primary">Ingresar</button>
+                </div>
+                
+                <div className="formControl">
+                <p className="softText">¿Olvidaste tu contraseña?</p>
+                <a href="#" id="resetPassword">Restablecer la contraseña</a>
+                </div>
+              </form>
+              
+            </div>
         </div>
       </div>
     </>
