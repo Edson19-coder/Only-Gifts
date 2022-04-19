@@ -3,6 +3,6 @@ package com.og.onlygiftsapi.db.domain.request;
 import lombok.Data;
 
 @Data
-public class ProductRequestId {
+public class ProductIdRequest {
 	private Integer productId;
 }

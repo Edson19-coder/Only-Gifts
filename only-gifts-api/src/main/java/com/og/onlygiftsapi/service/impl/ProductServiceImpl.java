@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.og.onlygiftsapi.db.domain.Product;
-import com.og.onlygiftsapi.db.domain.request.ProductRequestId;
+import com.og.onlygiftsapi.db.domain.request.ProductIdRequest;
 import com.og.onlygiftsapi.repository.ProductRepository;
 import com.og.onlygiftsapi.service.ProductService;
 
@@ -19,23 +19,23 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductRepository productRepository;
 
-	public ResponseEntity<?> addProduct(Product productRequest) {
-		Boolean response = productRepository.addProduct(productRequest);
+	public ResponseEntity<?> addProduct(Product request) {
+		Boolean response = productRepository.addProduct(request);
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 
-	public ResponseEntity<?> editProduct(Product productRequest) {
-		Boolean response = productRepository.editProduct(productRequest);
+	public ResponseEntity<?> editProduct(Product request) {
+		Boolean response = productRepository.editProduct(request);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
-	public ResponseEntity<?> dropProduct(Product productRequest) {
-		Boolean response = productRepository.dropProduct(productRequest);
+	public ResponseEntity<?> dropProduct(Product request) {
+		Boolean response = productRepository.dropProduct(request);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-	public ResponseEntity<?> getProduct(ProductRequestId productRequest) {
-		List<?> products = productRepository.getProduct(productRequest);
+	public ResponseEntity<?> getProduct(ProductIdRequest request) {
+		List<?> products = productRepository.getProduct(request);
 		return new ResponseEntity<>(products, HttpStatus.OK);
 	}
 	
@@ -44,8 +44,8 @@ public class ProductServiceImpl implements ProductService {
 		return new ResponseEntity<>(products, HttpStatus.OK);
 	}
 	
-	public ResponseEntity<?> getProductsByCategory(Product productRequest) {
-		List<?> products = productRepository.getProductsByCategory(productRequest);
+	public ResponseEntity<?> getProductsByCategory(Product request) {
+		List<?> products = productRepository.getProductsByCategory(request);
 		return new ResponseEntity<>(products, HttpStatus.OK);
 	}
 	

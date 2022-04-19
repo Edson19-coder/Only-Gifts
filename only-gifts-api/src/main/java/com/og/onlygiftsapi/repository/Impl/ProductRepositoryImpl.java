@@ -10,7 +10,7 @@ import javax.persistence.StoredProcedureQuery;
 import org.springframework.stereotype.Repository;
 
 import com.og.onlygiftsapi.db.domain.Product;
-import com.og.onlygiftsapi.db.domain.request.ProductRequestId;
+import com.og.onlygiftsapi.db.domain.request.ProductIdRequest;
 import com.og.onlygiftsapi.repository.ProductRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -118,7 +118,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 	}
 
 	@Override
-	public List<?> getProduct(ProductRequestId request) {
+	public List<?> getProduct(ProductIdRequest request) {
 		StoredProcedureQuery query = eManager.createStoredProcedureQuery("PROC_PRODUCT").
 		registerStoredProcedureParameter(1, String.class, ParameterMode.IN).
 		registerStoredProcedureParameter(2, Integer.class, ParameterMode.IN).

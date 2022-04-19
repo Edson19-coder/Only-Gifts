@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.og.onlygiftsapi.db.domain.Product;
-import com.og.onlygiftsapi.db.domain.request.ProductRequestId;
+import com.og.onlygiftsapi.db.domain.request.ProductIdRequest;
 import com.og.onlygiftsapi.globals.Endpoint;
 import com.og.onlygiftsapi.service.ProductService;
 
@@ -51,7 +51,7 @@ public class ProductController {
 	}
 	
 	@PostMapping(value = Endpoint.GET_PRODUCT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> getProduct(@RequestBody ProductRequestId productRequest) {
+	public ResponseEntity<?> getProduct(@RequestBody ProductIdRequest productRequest) {
 		log.info("Get Product");
 		return productService.getProduct(productRequest);
 	}
