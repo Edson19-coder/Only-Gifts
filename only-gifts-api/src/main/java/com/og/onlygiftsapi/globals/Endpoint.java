@@ -19,4 +19,23 @@ public class Endpoint {
 	public static final String DROP_SHOPPING_CART = "api/drop-shopping-cart";
 	
 	public static final String GET_SHOPPING_CART = "api/shopping-cart";
+	
+	public static final String ADD_ADDRESS = "api/add-address";
+	public static final String EDIT_ADDRESS = "api/edit-address";
+	public static final String DROP_ADDRESS = "api/drop-address";
+
+	public static final String GET_ADDRESS = "api/get-address";
+	public static final String GET_ADDRESSES = "api/get-addresses";
+	
+	public static final String ADD_PAYMENT_METHOD = "api/add-payment-method";
+	public static final String EDIT_PAYMENT_METHOD = "api/edit-payment-method";
+	public static final String DROP_PAYMENT_METHOD = "api/drop-payment-method";
+
+	public static final String GET_PAYMENT_METHOD = "api/get-payment-method";
+	public static final String GET_PAYMENT_METHODS = "api/get-payment-methods";
+	
+	public static final String ADD_PURCHASE = "api/add-purchase";
+	public static final String EDIT_PURCHASE = "api/edit-purchase";
+	
+	public static final String ADD_PURCHASE_ITEM = "api/add-purchase-item";
 }

@@ -1,6 +1,7 @@
 import {
     Routes,
-    Route
+    Route,
+    Redirect
 } from "react-router-dom";
 
 import React from 'react'
@@ -15,6 +16,7 @@ import HomePage from "../pages/Manager/HomePage/HomePage";
 import ManagerAjustes from "../pages/Manager/ManagerAjustes/ManagerAjustes";
 import ManagerManageContent from "../pages/Manager/ManagerManageContent/ManagerManageContent";
 import ManagerVentas from "../pages/Manager/ManagerVentas/ManagerVentas";
+import ManagerManagePurchases from "../pages/Manager/ManagerManagePurchases/ManagerManagePurchases";
 
 const Manager = () => {
 
@@ -22,12 +24,14 @@ const Manager = () => {
     <div>
         <AdminProvider> 
             <Routes>
-                <Route path="/" >
-                <Route path="home" element={<PrivateRouteAdmin > <HomePage/> </PrivateRouteAdmin>} />
-                <Route path="ajustes" element={<PrivateRouteAdmin > <ManagerAjustes/> </PrivateRouteAdmin>} />
-                <Route path="content" element={<PrivateRouteAdmin > <ManagerManageContent/> </PrivateRouteAdmin>} />
-                <Route path="ventas" element={<PrivateRouteAdmin > <ManagerVentas/> </PrivateRouteAdmin>} />
-                    <Route path="login" element={<ManagerLogin/>} ></Route>
+                <Route path="/">
+                    <Route path="" element={<PrivateRouteAdmin > <HomePage/> </PrivateRouteAdmin>} />
+                    <Route path="login" element={<ManagerLogin/>} />
+                    <Route path="home" element={<PrivateRouteAdmin > <HomePage/> </PrivateRouteAdmin>} />
+                    <Route path="ajustes" element={<PrivateRouteAdmin > <ManagerAjustes/> </PrivateRouteAdmin>} />
+                    <Route path="content" element={<PrivateRouteAdmin > <ManagerManageContent/> </PrivateRouteAdmin>} />
+                    <Route path="purchases" element={<PrivateRouteAdmin > <ManagerManagePurchases/> </PrivateRouteAdmin>} />
+                    <Route path="ventas" element={<PrivateRouteAdmin > <ManagerVentas/> </PrivateRouteAdmin>} />
                 </Route>
             </Routes>
         </AdminProvider>

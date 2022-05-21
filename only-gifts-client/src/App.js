@@ -12,6 +12,10 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import ProductItem from './pages/ProductItem/ProductItem';
 import Manager from './manager/Manager';
+import NavBar from './components/NavBar/NavBar';
+import PaymentMethod from './pages/PaymentMethod/PaymentMethod';
+import Address from './pages/Address/Address';
+import History from './pages/History/History';
 
 function App() {
   return (
@@ -21,6 +25,9 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="productItem" element={<ProductItem />} />
+          <Route path="payment-method" element={<PaymentMethod />} />
+          <Route path="address" element={<Address />} />
+          <Route path="orders-history" element={<History />} />
           {/* Manager */}
           <Route path="manager/*" element={<Manager />} />
         </Routes>

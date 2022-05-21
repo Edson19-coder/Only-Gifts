@@ -40,7 +40,7 @@ const ManagerManageContent = () => {
                   </div>
 
                   <div className="col-12">
-                  <table class="table table-hover">
+                  <table className="table table-hover">
                     <thead>
                       <tr>
                         <th scope="col">Estado</th>
@@ -51,7 +51,7 @@ const ManagerManageContent = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="table-secondary">
+                      <tr className="table-secondary">
                         <th scope="row"> <FaCircle className="text-success" /> Activo</th>
                         <td> SSD 500GB </td>
                         <td> $25 </td>
@@ -62,7 +62,7 @@ const ManagerManageContent = () => {
                         </td>
                         
                       </tr>
-                      <tr class="table-secondary">
+                      <tr className="table-secondary">
                         <th scope="row"> <FaCircle className="text-danger" /> Desactivado</th>
                         <td> SSD 500GB </td>
                         <td> $25 </td>
@@ -82,16 +82,16 @@ const ManagerManageContent = () => {
         </SideNavBar>
         {
           modal &&
-          <div class="modal "  style={{display:"block",backgroundColor:"rgba(1,1,1,0.5)"}}>
-          <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Agregar Producto</h5>
-                <button type="button"onClick={()=>{setModal(false)}} class="btn-close"  aria-label="Close">
+          <div className="modal "  style={{display:"block",backgroundColor:"rgba(1,1,1,0.5)"}}>
+          <div className="modal-dialog modal-dialog-centered modal-lg " role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Agregar Producto</h5>
+                <button type="button"onClick={()=>{setModal(false)}} className="btn-close"  aria-label="Close">
                   <span aria-hidden="true"></span>
                 </button>
               </div>
-              <div class="modal-body">
+              <div className="modal-body">
               <div className="row " >
                     
                       <div className="col-12 col-md-6">
@@ -130,9 +130,9 @@ const ManagerManageContent = () => {
                         <option value="4">Mochilas / Morrales / Loncheras</option>
                         </select>
 
-                        <div class="col-12 form-check form-switch" style={{margin: ".8rem 0rem"}}>
-                          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                          <label class="form-check-label" for="flexSwitchCheckDefault">Imagen personalizada</label>
+                        <div className="col-12 form-check form-switch" style={{margin: ".8rem 0rem"}}>
+                          <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                          <label className="form-check-label" for="flexSwitchCheckDefault">Imagen personalizada</label>
                         </div>
                       </div>
 
@@ -143,9 +143,9 @@ const ManagerManageContent = () => {
                       
                     </div>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Agregar <FaFeatherAlt style={{marginLeft:"5px"}} /></button>
-                <button type="button" class="btn btn-secondary" onClick={()=>{setModal(false)}} >Close</button>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-primary">Agregar <FaFeatherAlt style={{marginLeft:"5px"}} /></button>
+                <button type="button" className="btn btn-secondary" onClick={()=>{setModal(false)}} >Close</button>
               </div>
             </div>
           </div>

@@ -3,11 +3,14 @@ package com.og.onlygiftsapi.repository;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.og.onlygiftsapi.db.domain.User;
+import com.og.onlygiftsapi.db.domain.request.UserSignUpRequest;
 
-public interface UserRepository extends CrudRepository<User, Integer> {
+@Repository
+public interface UserRepository {
 
-	public Optional<User> findByEmail(String email);
-	
+	Boolean addUser(UserSignUpRequest request);
+	Object getUserByEmail(String email);
 }

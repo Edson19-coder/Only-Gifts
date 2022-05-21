@@ -2,7 +2,7 @@
 
 :root {
     --main-color: #f4949caa;
-    --main-color-soft: #ffecec;
+    --main-color-soft: #fef6fd;
     --main-color-hard: #f4949c;
     --main-color-white: #FDFCFD;
 }
@@ -16,7 +16,7 @@ a, a:hover {
     color: #0000008c;
 }
 
-.btn-primary:focus, .btn-primary:active {
+.ButtonNavBar:focus, .ButtonNavBar:active {
     border-color: var(--main-color);
     background-color: var(--main-color);
     box-shadow: 0px 0px 4px 4px #f4949c8a;

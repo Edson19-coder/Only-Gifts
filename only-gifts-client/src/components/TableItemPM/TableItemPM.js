@@ -11,15 +11,15 @@ const TableItemPM = () => {
       <td>
         <img
           src="https://doblevela.com/images/large/A2770_lrg.jpg"
-          class="img-fluid rounded-start img-card-h"
+          className="img-fluid rounded-start img-card-h"
           alt="..."
         />
       </td>
       <td>Nombre del producto</td>
       <td>$100</td>
       <td className="actions-section">
-        <a type="button" class="btn btn-primary"><FiEdit /></a>
-        <a type="button" class="btn btn-danger"><AiFillDelete /></a>
+        <a type="button" className="btn btn-primary"><FiEdit /></a>
+        <a type="button" className="btn btn-danger"><AiFillDelete /></a>
       </td>
     </tr>
   );

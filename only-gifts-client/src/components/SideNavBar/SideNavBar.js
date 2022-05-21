@@ -8,6 +8,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import { GoGraph } from "react-icons/go";
 import { HiDocumentText } from "react-icons/hi";
 import { AiTwotoneSetting } from "react-icons/ai";
+import { BiPurchaseTagAlt } from "react-icons/bi";
 
 const SideNavBar = ({children}) => {
 
@@ -29,6 +30,10 @@ const SideNavBar = ({children}) => {
               <Link to="/manager/content" className={`nav-btn text-gray rounded-3 mt-3 decorate-none  ${expand ? "text-center" :"" } ` }>
                 <IoIosAddCircle style={{marginRight:"5px"}} />
                 {!expand && "Administrar Contenido"}
+              </Link>
+              <Link to="/manager/purchases" className={`nav-btn text-gray rounded-3 decorate-none  ${expand ? "text-center" :"" } ` }>
+                <BiPurchaseTagAlt style={{marginRight:"5px"}} />
+                {!expand &&  "Administrar Ventas"}
               </Link>
               <Link to="/manager/ventas" className={`nav-btn text-gray rounded-3 decorate-none  ${expand ? "text-center" :"" } ` }>
                 <GoGraph style={{marginRight:"5px"}} />
