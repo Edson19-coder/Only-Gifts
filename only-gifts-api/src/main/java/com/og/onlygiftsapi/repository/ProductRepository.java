@@ -6,15 +6,18 @@ import org.springframework.stereotype.Repository;
 
 import com.og.onlygiftsapi.db.domain.Product;
 import com.og.onlygiftsapi.db.domain.request.ProductIdRequest;
+import com.og.onlygiftsapi.db.domain.request.ProductRequest;
 
 @Repository
 public interface ProductRepository {
-	Boolean addProduct(Product request);
-	Boolean editProduct(Product request);
-	Boolean dropProduct(Product request);
+	Integer addProduct(ProductRequest request);
+	Boolean addProductImage(Integer productId, String imageUrl);
+	Boolean editProduct(ProductRequest request);
+	Boolean dropProduct(ProductRequest request);
+	Boolean changeStatusProduct(ProductRequest request);
 	
-	List<?> getProduct(ProductIdRequest request);
+	Object getProduct(ProductRequest request);
 	List<?> getProducts();
-	List<?> getProductsByCategory(Product request);
+	List<?> getProductsBySearch(ProductRequest request);
 	List<?> getProductsManager();
 }

@@ -36,26 +36,19 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	public ResponseEntity<?> getAddress(AddressRequest request) {
-		List<?> addresses = addressRepository.getAddress(request);
-		if(addresses == null || addresses.isEmpty()) {
-			throw new ResourceNotFoundException("Address", "address", request.getAddressId());
-		}
-		AddressListResponse response = new AddressListResponse();
-		for(Object o : addresses) {
-			Object[] obj = (Object[]) o;
-			AddressResponse address = new AddressResponse();
-			address.setAddressId(Integer.valueOf(String.valueOf(obj[0])));
-			address.setCountry(String.valueOf(obj[1]));
-			address.setName(String.valueOf(obj[2]));
-			address.setStreetNumber(String.valueOf(obj[3]));
-			address.setPostalCode(Integer.valueOf(String.valueOf(obj[4])));
-			address.setState(String.valueOf(obj[5]));
-			address.setCity(String.valueOf(obj[6]));
-			address.setSuburb(String.valueOf(obj[7]));
-			address.setPhone(String.valueOf(obj[8]));
-			address.setAdditionalInstruction(String.valueOf(obj[9]));
-			response.add(address);
-		}
+		Object addresses = addressRepository.getAddress(request);
+		Object[] fields = (Object[]) addresses;
+		AddressResponse response = new AddressResponse();
+		response.setAddressId(Integer.valueOf(String.valueOf(fields[0])));
+		response.setCountry(String.valueOf(fields[1]));
+		response.setName(String.valueOf(fields[2]));
+		response.setStreetNumber(String.valueOf(fields[3]));
+		response.setPostalCode(Integer.valueOf(String.valueOf(fields[4])));
+		response.setState(String.valueOf(fields[5]));
+		response.setCity(String.valueOf(fields[6]));
+		response.setSuburb(String.valueOf(fields[7]));
+		response.setPhone(String.valueOf(fields[8]));
+		response.setAdditionalInstruction(String.valueOf(fields[9]));
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 

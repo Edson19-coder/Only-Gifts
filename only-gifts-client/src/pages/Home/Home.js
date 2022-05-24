@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState, useEffect } from 'react'
 import { Carousel, Row, CardGroup, Col } from 'react-bootstrap';
 import CardItem from '../../components/CardItem/CardItem';
 
@@ -6,12 +6,33 @@ import NavBar from "../../components/NavBar/NavBar";
 
 import './Home.css';
 
+import { getProducts } from '../../api/ProductAPI';
+
+var token = localStorage.getItem("token");
+
 const Home = () => {
+  const [products, setProduct] = useState([]);
+
+  useEffect(() => {
+
+    getProducts(token).then(res => {
+      var products = [];
+      if (res) {
+        products = res.data.productList;
+      }
+      setProduct(products);
+      console.log(products);
+    }).catch(err => {
+      console.log(err);
+    });
+
+  }, [])
+
   return (
     <>
 
       <NavBar />
-      
+
       <div>
         <Carousel>
           <Carousel.Item interval={1000}>
@@ -36,23 +57,23 @@ const Home = () => {
             />
           </Carousel.Item>
         </Carousel>
-      
+
         <div id="productsContainer">
-          <br/>
+          <br />
           <h1>Productos más nuevos</h1>
-          <hr/>
+          <hr />
 
           <Row id="products">
-          <CardGroup>
-            {Array.from({ length: 6 }).map((_, idx) => (
-                  <CardItem></CardItem>
-            ))}
-          </CardGroup>
+            <CardGroup>
+              {products ? products.map((item) => (
+                <CardItem data={item} />
+              )) : console.log(products)}
+            </CardGroup>
           </Row>
 
         </div>
       </div>
-    
+
     </>
   )
 }

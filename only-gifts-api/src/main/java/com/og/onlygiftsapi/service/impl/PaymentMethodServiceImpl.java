@@ -48,22 +48,15 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
 	}
 
 	public ResponseEntity<?> getPaymentMethod(PaymentMethodRequest request) {
-		List<?> paymentMethods = paymentMethodRepository.getPaymentMethod(request);
-		if(paymentMethods == null || paymentMethods.isEmpty()) {
-			throw new ResourceNotFoundException("Payment Method", "payment method", request.getPaymentMethodsId());
-		}
-		PaymentMethodListResponse response = new PaymentMethodListResponse();
-		for(Object o : paymentMethods) {
-			Object[] obj = (Object[]) o;
-			PaymentMethodResponse paymentMethod = new PaymentMethodResponse();
-			paymentMethod.setPaymentMethodsId(Integer.valueOf(String.valueOf(obj[0])));
-			paymentMethod.setMethod(String.valueOf(obj[1]));
-			paymentMethod.setCardHolder(String.valueOf(obj[2]));
-			paymentMethod.setCardNumber(String.valueOf(obj[3]));
-			paymentMethod.setExpirationMonth(String.valueOf(obj[4]));
-			paymentMethod.setExpirationYear(String.valueOf(obj[5]));
-			response.add(paymentMethod);
-		}
+		Object paymentMethods = paymentMethodRepository.getPaymentMethod(request);
+		Object[] fields = (Object[]) paymentMethods;
+		PaymentMethodResponse response = new PaymentMethodResponse();
+		response.setPaymentMethodsId(Integer.valueOf(String.valueOf(fields[0])));
+		response.setMethod(String.valueOf(fields[1]));
+		response.setCardHolder(String.valueOf(fields[2]));
+		response.setCardNumber(String.valueOf(fields[3]));
+		response.setExpirationMonth(String.valueOf(fields[4]));
+		response.setExpirationYear(String.valueOf(fields[5]));
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 

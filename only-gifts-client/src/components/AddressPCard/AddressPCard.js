@@ -13,31 +13,18 @@ const AddressPCard = (props) => {
                     type="radio"
                     name="card"
                     className="addressSelected"
-                    data-addressid={props.id}
-                    data-cardnumber="1234"
-                    data-cardtype="visa"
+                    data-addressid={props.data.addressId}
+                    onChange={props.onChangeFunction}
                   />
                 </div>
               </div>
-              <span>
-                Destinatario: <span>Pedro Angel Ramirez Villarreal</span>
-              </span>
-              <span>
-                Colonia:<span>Galin</span>
-              </span>
-              <span>
-                Estado:<span>Nuevo Leon</span>
-              </span>
-              <span>
-                Pais:<span>Mexico</span>
-              </span>
-              <span>
-                Ciudad:<span>Apodaca</span>
-              </span>
-              <span>
-                Direccion:<span>Cuarta</span>
-                <span>#817</span>
-              </span>
+              <span><b>{props.data.name}</b></span>
+              <span>{props.data.streetNumber}</span>
+              <span>{props.data.suburb}</span>
+              <span>{props.data.city}, {props.data.state}</span>
+              <span>{props.data.postalCode}</span>
+              <span>{props.data.country}</span>
+              <span>T&eacute;lefono: {props.data.phone}</span>
             </div>
           </div>
         </div>

@@ -12,6 +12,6 @@ public interface PaymentMethodRepository {
 	Boolean editPaymentMethod(PaymentMethodRequest request);
 	Boolean dropPaymentMethod(PaymentMethodRequest request);
 	
-	List<?> getPaymentMethod(PaymentMethodRequest request);
+	Object getPaymentMethod(PaymentMethodRequest request);
 	List<?> getPaymentMethods(PaymentMethodRequest request);
 }

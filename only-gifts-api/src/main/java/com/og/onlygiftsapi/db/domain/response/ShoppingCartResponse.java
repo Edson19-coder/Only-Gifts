@@ -12,4 +12,5 @@ public class ShoppingCartResponse {
 	private String comment;
 	private Float unitary;
 	private Float byQuantity;
+	private String category;
 }

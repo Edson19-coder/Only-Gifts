@@ -5,7 +5,7 @@ export const createNotification = (status, messages, redirect, route) => {
         case 200:
             if(redirect) {
                 swal({
-                    title: "Bien hecho!",
+                    title: "¡Bien hecho!",
                     text: messages,
                     icon: "success",
                     button: "Ok",
@@ -16,7 +16,7 @@ export const createNotification = (status, messages, redirect, route) => {
                 })
             } else {
                 swal({
-                    title: "Bien hecho!",
+                    title: "¡Bien hecho!",
                     text: messages,
                     icon: "success",
                     button: "Ok",
@@ -25,7 +25,7 @@ export const createNotification = (status, messages, redirect, route) => {
         break;
         case 201:
             swal({
-                title: "Info!",
+                title: "¡Info!",
                 text: messages,
                 icon: "info",
                 button: "Ok",
@@ -33,7 +33,7 @@ export const createNotification = (status, messages, redirect, route) => {
         break;
         case 204:
             swal({
-                title: "Alerta!",
+                title: "¡Alerta!",
                 text: messages,
                 icon: "warning",
                 button: "Ok",
@@ -41,7 +41,7 @@ export const createNotification = (status, messages, redirect, route) => {
         break;
         case 500:
             swal({
-                title: "Error!",
+                title: "¡Error!",
                 text: messages,
                 icon: "error",
                 button: "Ok",

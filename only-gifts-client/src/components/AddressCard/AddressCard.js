@@ -7,13 +7,13 @@ const AddressCard = (props) => {
         <div className="d-flex row">
           <div className="col-lg-12">
             <div className="m-2 row">
-              <span><b>Edson Lugo</b></span>
-              <span>Los Naranjos #111</span>
-              <span>RESIDENCIAL ESCOBEDO</span>
-              <span>CIUDAD GENERAL ESCOBEDO, NUEVO LEON</span>
-              <span>66057</span>
-              <span>México</span>
-              <span>T&eacute;lefono: 8128949908</span>
+              <span><b>{props.data.name}</b></span>
+              <span>{props.data.streetNumber}</span>
+              <span>{props.data.suburb}</span>
+              <span>{props.data.city}, {props.data.state}</span>
+              <span>{props.data.postalCode}</span>
+              <span>{props.data.country}</span>
+              <span>T&eacute;lefono: {props.data.phone}</span>
             </div>
           </div>
           <div className="col-lg-12">

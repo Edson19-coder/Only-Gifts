@@ -14,21 +14,21 @@ const HomePage = () => {
                           Bienvenido 👋
                   </div>  
                   <div className="col-12 h6 text-muted mt-1">
-                         Esperamos que la creación de tu tienda en línea sea la mejor. Siéntase libre  <br />
-                         de acceder cuando quiera y configurar su web a su gusto.
+                         ¡Hola de nuevo!  <br />
+
                   </div>  
                   <div className="col-12 mt-2">
-                    <Link to="/admin/content" className="btn btn-primary" > Agregar producto  <FaFeatherAlt /> </Link>
+                    <Link to="/manager/content" className="btn btn-primary" > Agregar producto  <FaFeatherAlt /> </Link>
                   </div>
                  
               </div>
             <div className="row mt-5 " >
               <div className="col-12">
-               <Link to="/admin" style={{width:"300px"}} className=" align-items-center  decorate-none d-flex justify-content-between bg-white rounded-3 h4 shadow p-4">
-                    <div className="d-flex align-items-center" > <FaFeatherAlt className="text-white bg-primary p-2 rounded-3 " style={{marginRight:"2px",fontSize:"1rem"}} /> Documentación</div> <FaFeatherAlt />
+               <Link to="/manager/purchases" style={{width:"300px"}} className=" align-items-center  decorate-none d-flex justify-content-between bg-white rounded-3 h4 shadow p-4">
+                    <div className="d-flex align-items-center" > <FaFeatherAlt className="text-white bg-primary p-2 rounded-3 " style={{marginRight:"2px",fontSize:"1rem"}} /> Administrar Ventas</div> <FaFeatherAlt />
                </Link>
-               <Link to="/admin/design" style={{width:"300px"}} className=" align-items-center  decorate-none d-flex justify-content-between bg-white rounded-3 h4 shadow p-4">
-                    <div className="d-flex align-items-center" > <FaFeatherAlt className="text-white bg-primary p-2 rounded-3 " style={{marginRight:"2px",fontSize:"1rem"}} /> Diseñar</div> <FaFeatherAlt />
+               <Link to="/manager/ventas" style={{width:"300px"}} className=" align-items-center  decorate-none d-flex justify-content-between bg-white rounded-3 h4 shadow p-4">
+                    <div className="d-flex align-items-center" > <FaFeatherAlt className="text-white bg-primary p-2 rounded-3 " style={{marginRight:"2px",fontSize:"1rem"}} /> Historial de Ventas</div> <FaFeatherAlt />
                </Link>
               </div>
           

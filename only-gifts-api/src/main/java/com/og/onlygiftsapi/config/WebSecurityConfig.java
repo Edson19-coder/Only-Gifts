@@ -47,7 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			"/api/user", 
 			"/api/user/SignIn",
 			"/api/get-product",
-			"/api/get-products"
+			"/api/get-products",
+			"/api/get-image-product/{productId}/{image}"
 		).
 		permitAll()
         .antMatchers("/api/manager/*").hasRole("MANAGER")

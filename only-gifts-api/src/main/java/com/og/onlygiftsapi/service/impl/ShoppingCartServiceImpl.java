@@ -57,6 +57,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 			cartItem.setComment(String.valueOf(obj[5]));
 			cartItem.setUnitary(Float.valueOf(String.valueOf(obj[6])));
 			cartItem.setByQuantity(Float.valueOf(String.valueOf(obj[7])));
+			cartItem.setCategory(String.valueOf(obj[8]));
 			response.add(cartItem);
 		}
 		return new ResponseEntity<>(response, HttpStatus.OK);

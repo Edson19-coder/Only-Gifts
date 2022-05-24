@@ -118,7 +118,7 @@ public class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
 	}
 
 	@Override
-	public List<?> getPaymentMethod(PaymentMethodRequest request) {
+	public Object getPaymentMethod(PaymentMethodRequest request) {
 		log.info("Executing PROC_PAYMENT_METHODS.GET_PAYMENT_METHOD");
 		StoredProcedureQuery query = eManager.createStoredProcedureQuery("PROC_PAYMENT_METHODS").
 		registerStoredProcedureParameter(1, String.class, ParameterMode.IN).
@@ -143,7 +143,7 @@ public class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
 		setParameter(10, "");
 		query.execute();
 		@SuppressWarnings("unchecked")
-		List<Object[]> rptTrx = query.getResultList();
+		Object rptTrx = query.getSingleResult();
 		return rptTrx;
 	}
 

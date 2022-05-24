@@ -24,66 +24,38 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
 	EntityManager eManager;
 	
 	@Override
-	public List<?> addPurchase(PurchaseRequest request) {
-		log.info("Executing PROC_PURCHASES.ADD_PURCHASE");
-		StoredProcedureQuery query = eManager.createStoredProcedureQuery("PROC_PURCHASES").
-		registerStoredProcedureParameter(1, String.class, ParameterMode.IN).
+	public Integer addPurchase(PurchaseRequest request) {
+		log.info("Executing PROC_ADD_PURCHASES");
+		StoredProcedureQuery query = eManager.createStoredProcedureQuery("PROC_ADD_PURCHASES").
+		registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN).
 		registerStoredProcedureParameter(2, Integer.class, ParameterMode.IN).
 		registerStoredProcedureParameter(3, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(4, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(5, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(6, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(7, String.class, ParameterMode.IN).
-		registerStoredProcedureParameter(8, String.class, ParameterMode.IN).
-		registerStoredProcedureParameter(9, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(10, String.class, ParameterMode.IN).
-		registerStoredProcedureParameter(11, Integer.class, ParameterMode.IN).
-		setParameter(1, "ADD_PURCHASE").
-		setParameter(2, -1).
-		setParameter(3, -1).
-		setParameter(4, request.getUserId()).
-		setParameter(5, request.getAddressId()).
-		setParameter(6, request.getPaymentMethodId()).
-		setParameter(7, request.getTotalAmount()).
-		setParameter(8, "").
-		setParameter(9, -1).
-		setParameter(10, "").
-		setParameter(11, -1);
+		registerStoredProcedureParameter(4, Float.class, ParameterMode.IN).
+		registerStoredProcedureParameter(5, Integer.class, ParameterMode.OUT).
+		setParameter(1, request.getUserId()).
+		setParameter(2, request.getAddressId()).
+		setParameter(3, request.getPaymentMethodId()).
+		setParameter(4, Float.parseFloat(request.getTotalAmount()));
 		query.execute();
-		@SuppressWarnings("unchecked")
-		List<Object[]> rptTrx = query.getResultList();
-		return rptTrx;
+		try {
+			return Integer.parseInt(query.getOutputParameterValue(5).toString());
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 	@Override
 	public Boolean editPurchase(PurchaseRequest request) {
-		log.info("Executing PROC_PURCHASES.EDIT_PURCHASE");
-		StoredProcedureQuery query = eManager.createStoredProcedureQuery("PROC_PURCHASES").
-		registerStoredProcedureParameter(1, String.class, ParameterMode.IN).
-		registerStoredProcedureParameter(2, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(3, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(4, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(5, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(6, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(7, String.class, ParameterMode.IN).
-		registerStoredProcedureParameter(8, String.class, ParameterMode.IN).
-		registerStoredProcedureParameter(9, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(10, String.class, ParameterMode.IN).
-		registerStoredProcedureParameter(11, Integer.class, ParameterMode.IN).
-		setParameter(1, "EDIT_PURCHASE").
-		setParameter(2, request.getPurchaseId()).
-		setParameter(3, -1).
-		setParameter(4, -1).
-		setParameter(5, -1).
-		setParameter(6, -1).
-		setParameter(7, "").
-		setParameter(8, request.getStatus()).
-		setParameter(9, -1).
-		setParameter(10, "").
-		setParameter(11, -1);
+		log.info("Executing PROC_CHANGE_STATUS_PURCHASE");
+		StoredProcedureQuery query = eManager.createStoredProcedureQuery("PROC_CHANGE_STATUS_PURCHASE").
+		registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN).
+		registerStoredProcedureParameter(2, String.class, ParameterMode.IN).
+		registerStoredProcedureParameter(3, Boolean.class, ParameterMode.OUT).
+		setParameter(1, request.getPurchaseId()).
+		setParameter(2, request.getStatus());
+		query.execute();
 		try {
-			query.execute();
-			return true;
+			return Boolean.parseBoolean(query.getOutputParameterValue(3).toString());
 		} catch (Exception e) {
 			return false;
 		}
@@ -91,48 +63,86 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
 
 	@Override
 	public Boolean addPurchaseItem(PurchaseItemRequest request) {
-		log.info("Executing PROC_PURCHASES.ADD_PURCHASE_ITEM");
-		StoredProcedureQuery query = eManager.createStoredProcedureQuery("PROC_PURCHASES").
-		registerStoredProcedureParameter(1, String.class, ParameterMode.IN).
+		log.info("Executing PROC_ADD_PURCHASE_ITEM");
+		StoredProcedureQuery query = eManager.createStoredProcedureQuery("PROC_ADD_PURCHASE_ITEM").
+		registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN).
 		registerStoredProcedureParameter(2, Integer.class, ParameterMode.IN).
 		registerStoredProcedureParameter(3, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(4, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(5, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(6, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(7, String.class, ParameterMode.IN).
-		registerStoredProcedureParameter(8, String.class, ParameterMode.IN).
-		registerStoredProcedureParameter(9, Integer.class, ParameterMode.IN).
-		registerStoredProcedureParameter(10, String.class, ParameterMode.IN).
-		registerStoredProcedureParameter(11, Integer.class, ParameterMode.IN).
-		setParameter(1, "ADD_PURCHASE_ITEM").
-		setParameter(2, request.getPurchaseId()).
-		setParameter(3, -1).
-		setParameter(4, -1).
-		setParameter(5, -1).
-		setParameter(6, -1).
-		setParameter(7, "").
-		setParameter(8, "").
-		setParameter(9, request.getProductId()).
-		setParameter(10, "").
-		setParameter(11, request.getQuantity());
+		registerStoredProcedureParameter(4, String.class, ParameterMode.IN).
+		registerStoredProcedureParameter(5, Boolean.class, ParameterMode.OUT).
+		setParameter(1, request.getPurchaseId()).
+		setParameter(2, request.getProductId()).
+		setParameter(3, request.getQuantity()).
+		setParameter(4, request.getComment());
+		query.execute();
 		try {
-			query.execute();
-			return true;
+			return Boolean.parseBoolean(query.getOutputParameterValue(5).toString());
 		} catch (Exception e) {
 			return false;
 		}
 	}
 
 	@Override
-	public List<?> getPurchase(PurchaseRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<?> getPurchasesByUser(PurchaseRequest request) {
+		StoredProcedureQuery query = eManager.createStoredProcedureQuery("PROC_GET_PURCHASE_USER").
+		registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN).
+		setParameter(1, request.getUserId());
+		query.execute();
+		@SuppressWarnings("unchecked")
+		List<Object[]> rptTrx = query.getResultList();
+		return rptTrx;
+	}
+	
+	@Override
+	public List<?> getPurchasesByManager() {
+		StoredProcedureQuery query = eManager.createStoredProcedureQuery("PROC_GET_PURCHASE_MANAGER");
+		query.execute();
+		@SuppressWarnings("unchecked")
+		List<Object[]> rptTrx = query.getResultList();
+		return rptTrx;
+	}
+	
+	@Override
+	public List<?> getPurchasesByManagerHistory() {
+		StoredProcedureQuery query = eManager.createStoredProcedureQuery("PROC_GET_PURCHASE_MANAGER_HISTORY");
+		query.execute();
+		@SuppressWarnings("unchecked")
+		List<Object[]> rptTrx = query.getResultList();
+		return rptTrx;
+	}
+	
+	@Override
+	public Object getPurchase(PurchaseRequest request) {
+		StoredProcedureQuery query = eManager.createStoredProcedureQuery("PROC_GET_PURCHASE_DETAIL").
+		registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN).
+		setParameter(1, request.getPurchaseId());
+		query.execute();
+		@SuppressWarnings("unchecked")
+		Object rptTrx = query.getSingleResult();
+		return rptTrx;
 	}
 
 	@Override
-	public List<?> getPurchases(PurchaseRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+	public Object getPurchaseDetail(PurchaseRequest request) {
+		StoredProcedureQuery query = eManager.createStoredProcedureQuery("PROC_GET_PURCHASE_DETAIL").
+		registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN).
+		setParameter(1, request.getPurchaseId());
+		query.execute();
+		@SuppressWarnings("unchecked")
+		Object rptTrx = query.getSingleResult();
+		return rptTrx;
 	}
+
+	@Override
+	public List<?> getPurchaseItems(PurchaseRequest request) {
+		StoredProcedureQuery query = eManager.createStoredProcedureQuery("PROC_GET_PURCHASE_ITEMS").
+		registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN).
+		setParameter(1, request.getPurchaseId());
+		query.execute();
+		@SuppressWarnings("unchecked")
+		List<Object[]> rptTrx = query.getResultList();
+		return rptTrx;
+	}
+
 
 }

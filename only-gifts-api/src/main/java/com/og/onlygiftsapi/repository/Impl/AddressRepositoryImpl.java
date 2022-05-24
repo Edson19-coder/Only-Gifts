@@ -130,7 +130,7 @@ public class AddressRepositoryImpl implements AddressRepository {
 	}
 
 	@Override
-	public List<?> getAddress(AddressRequest request) {
+	public Object getAddress(AddressRequest request) {
 		log.info("Executing PROC_ADDRESSES.GET_ADDRESS");
 		StoredProcedureQuery query = eManager.createStoredProcedureQuery("PROC_ADDRESSES").
 		registerStoredProcedureParameter(1, String.class, ParameterMode.IN).
@@ -159,7 +159,7 @@ public class AddressRepositoryImpl implements AddressRepository {
 		setParameter(12, "");
 		query.execute();
 		@SuppressWarnings("unchecked")
-		List<Object[]> rptTrx = query.getResultList();
+		Object rptTrx = query.getSingleResult();
 		return rptTrx;
 	}
 

@@ -12,6 +12,6 @@ public interface AddressRepository {
 	Boolean editAddress(AddressRequest request);
 	Boolean dropAddress(AddressRequest request);
 	
-	List<?> getAddress(AddressRequest request);
+	Object getAddress(AddressRequest request);
 	List<?> getAddresses(AddressRequest request);
 }

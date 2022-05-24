@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 	public ResponseEntity<?> createUser(UserSignUpRequest request) {
 		Object emailIsUsed = userRepository.getUserByEmail(request.getEmail());
 		
-		if(emailIsUsed == null) {
+		if(emailIsUsed != null) {
 			throw new ResourceFoundException("User", "email", request.getEmail());
 		}
 		
@@ -59,6 +59,7 @@ public class UserServiceImpl implements UserService {
 		response.setLastName(String.valueOf(fields[2]));
 		response.setEmail(String.valueOf(fields[3]));
 		response.setRole(String.valueOf(fields[5]));
+		response.setShoppingCartId(Integer.valueOf(String.valueOf(fields[6])));
 		
 		if(!bCryptPasswordEncoder.matches(request.getPassword(), String.valueOf(fields[4]))) {
 			throw new ResourceNotFoundException("User", "password", request.getEmail());

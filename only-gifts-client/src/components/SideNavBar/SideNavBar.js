@@ -1,6 +1,7 @@
 import React,{useContext, useState} from 'react';
 import logo from "../../pages/src/logo.png";
 import Context from '../../context/AdminContext';
+import ContextAdmin from "../../context/AdminContext";
 import {Link} from "react-router-dom";
 
 import { BsLayoutSidebarInset } from "react-icons/bs";
@@ -10,9 +11,17 @@ import { HiDocumentText } from "react-icons/hi";
 import { AiTwotoneSetting } from "react-icons/ai";
 import { BiPurchaseTagAlt } from "react-icons/bi";
 
+import { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';
+import {faFeather,faRightToBracket,faFileLines,faWandMagicSparkles,faChartLine,faAngleRight,faDisplay,faClipboardCheck} from "@fortawesome/free-solid-svg-icons"
+
 const SideNavBar = ({children}) => {
 
   const {user,expand,setExpand} = useContext(Context)
+  const {logOut} = useContext(ContextAdmin);
+  const handlerSalir = ()=>{
+    localStorage.clear();
+    window.location = '/manager/login';
+  }
 
   return (
     
@@ -37,7 +46,7 @@ const SideNavBar = ({children}) => {
               </Link>
               <Link to="/manager/ventas" className={`nav-btn text-gray rounded-3 decorate-none  ${expand ? "text-center" :"" } ` }>
                 <GoGraph style={{marginRight:"5px"}} />
-                {!expand &&  "Ventas"}
+                {!expand &&  "Historial de Ventas"}
               </Link>
               
               {
@@ -49,10 +58,10 @@ const SideNavBar = ({children}) => {
                 <HiDocumentText style={{marginRight:"5px"}} />
                 {!expand && "Documentación"}
               </div>
-              <Link to="/manager/ajustes" className={`nav-btn text-gray rounded-3  decorate-none  ${expand ? "text-center" :"" } ` }>
-                <AiTwotoneSetting style={{marginRight:"5px"}} />
-                {!expand && "Ajustes"}
-              </Link>
+              <div onClick={handlerSalir} className={`nav-btn text-gray rounded-3 decorate-none  ${expand ? "text-center" :"" } ` }>
+                <FA icon={faRightToBracket} style={{marginRight:"5px"}} ></FA>
+                {!expand && "Salir"}
+              </div>
              
             </div>
             

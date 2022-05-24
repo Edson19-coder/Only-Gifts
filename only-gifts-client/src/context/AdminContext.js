@@ -10,7 +10,7 @@ export function AdminProvider({children}){
     
     const logOut = useCallback(()=>{
         setUser(null);
-        Cookies.remove("admin");
+        localStorage.clear();
     })
 
     const logIn = useCallback((user)=>{

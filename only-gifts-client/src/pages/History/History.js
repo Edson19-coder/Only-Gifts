@@ -1,15 +1,86 @@
-import React, { useCallback, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from '../../components/NavBar/NavBar';
-import { BiDetail } from "react-icons/bi";
 import ProductPurchase from '../../components/ProductPurchase/ProductPurchase';
+import { getPurchaseDetail, getPurchasesUser, updatePurchase } from '../../api/PurchaseAPI';
+import Purchase from '../../components/Purchase';
+import swal from 'sweetalert';
 
+var token = localStorage.getItem("token");
+var userId = localStorage.getItem("userId");
 
+var purchaseSelected = null;
+var purchaseSelectedInfo = null;
 const History = () => {
+    const [purchases, setPurchases] = useState([]);
     const [modal, setModal] = useState(false)
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        getPurchasesUser({ userId: userId }, token).then(result => {
+            var purchases = [];
+            if (result) {
+                purchases = result.data.purchaseList;
+            }
+            setPurchases(purchases);
+            console.log(result.data.purchaseList);
+        }).catch(err => {
+            console.log(err);
+        });
+    }, []);
+
+    const getPurchaseId = (e) => {
+        purchaseSelected = e.target.getAttribute("data-purchaseid");
+        if (purchaseSelected != null) {
+            getPurchaseDetail({ purchaseId: purchaseSelected }, token).then((response) => {
+                if (response.status == 200) {
+                    purchaseSelectedInfo = {
+                        name: response.data.name,
+                        streetNumber: response.data.streetNumber,
+                        suburb: response.data.suburb,
+                        city: response.data.city,
+                        state: response.data.state,
+                        postalCode: response.data.postalCode,
+                        country: response.data.country,
+                        phone: response.data.phone,
+                        cardNumber: response.data.cardNumber,
+                        method: response.data.method,
+                        totalAmount: response.data.totalAmount
+                    };
+                    var p = [];
+                    p = response.data.items;
+                    setProducts(p);
+                }
+            }).finally(() => {
+                setModal(true);
+            });
+        }
+    }
+
+    const cancelPurchase = (e) => {
+        purchaseSelected = e.target.getAttribute("data-purchaseid");
+        if (purchaseSelected != null) {
+
+            swal({
+                title: "¡Alerta!",
+                text: "¿Estas seguro que quieres cancelar la compra?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              }).then((result) => {
+                if (result) {
+                    updatePurchase({ purchaseId: purchaseSelected, status: "C" }, token).then((response) => {
+                        if(response.status === 200) {
+                            window.location = '/orders-history';
+                        }
+                    });
+                }
+              })
+        }
+    }
 
     return (
         <>
-            <NavBar/>
+            <NavBar />
             <div className="container">
                 <div className="row">
                     <div className="col-12 h2">
@@ -20,13 +91,6 @@ const History = () => {
 
                 <div className="row mt-3 bg-white rounded-3 shadow p-4 ">
                     <div className="col-6 h4 mb-3"> Pedidos </div>
-                    <div className="col-6 h4 mb-3 d-flex flex-row-reverse ">
-                        <select name="" id="" className="form-select  "  >
-                            <option className='' >   Pendientes </option>
-                            <option> En Camino </option>
-                            <option> Entregado </option>
-                        </select>
-                    </div>
 
                     <div className="col-12">
                         <table className="table table-hover">
@@ -40,24 +104,9 @@ const History = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className="table-secondary">
-                                    <th scope="row" > 123 </th>
-                                    <td> 14 de mayo de 2022 </td>
-                                    <td> $250.0 </td>
-                                    <td> En camino </td>
-                                    <td style={{ textAlign: "center" }}>
-                                        <button scope="row" onClick={() => { setModal(true) }} className="btn  btn-sm " style={{ marginRight: "3px" }} ><BiDetail /></button>
-                                    </td>
-                                </tr>
-                                <tr className="table-secondary">
-                                    <th scope="row" > 123 </th>
-                                    <td> 14 de mayo de 2022 </td>
-                                    <td> $250.0 </td>
-                                    <td> Pendiente </td>
-                                    <td style={{ textAlign: "center" }}>
-                                        <button scope="row" onClick={() => { setModal(true) }} className="btn  btn-sm " style={{ marginRight: "3px" }} ><BiDetail /></button>
-                                    </td>
-                                </tr>
+                                {purchases ? purchases.map((item) => (
+                                    <Purchase key={item.purchaseId} data={item} GetPurchase={getPurchaseId} onClickCancel={cancelPurchase} />
+                                )) : console.log(purchases)}
                             </tbody>
                         </table>
                     </div>
@@ -82,26 +131,13 @@ const History = () => {
                                         <div className="d-flex row">
                                             <div className="col-lg-12 d-flex flex-row">
                                                 <div className="m-2 row">
-                                                    <span>
-                                                        Destinatario:{" "}
-                                                        <span>Pedro Angel Ramirez Villarreal</span>
-                                                    </span>
-                                                    <span>
-                                                        Colonia: <span>Galin</span>
-                                                    </span>
-                                                    <span>
-                                                        Estado: <span>Nuevo Leon</span>
-                                                    </span>
-                                                    <span>
-                                                        Pais: <span>Mexico</span>
-                                                    </span>
-                                                    <span>
-                                                        Ciudad: <span>Apodaca</span>
-                                                    </span>
-                                                    <span>
-                                                        Direccion: <span>Cuarta</span>
-                                                        <span>#817</span>
-                                                    </span>
+                                                    <span><b>{purchaseSelectedInfo.name}</b></span>
+                                                    <span>{purchaseSelectedInfo.streetNumber}</span>
+                                                    <span>{purchaseSelectedInfo.suburb}</span>
+                                                    <span>{purchaseSelectedInfo.city}, {purchaseSelectedInfo.state}</span>
+                                                    <span>{purchaseSelectedInfo.postalCode}</span>
+                                                    <span>{purchaseSelectedInfo.country}</span>
+                                                    <span>T&eacute;lefono: {purchaseSelectedInfo.phone}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -115,7 +151,7 @@ const History = () => {
                                                 <div className="m-2 row">
                                                     <span>
                                                         <img src="https://www.freepnglogos.com/uploads/visa-inc-logo-png-11.png" className="visa" alt="" style={{ marginRight: "1rem", width: "4rem", height: "1.5rem" }} />
-                                                        <span>**** **** **** 1234</span>
+                                                        <span>**** **** **** {purchaseSelectedInfo.cardNumber}</span>
                                                     </span>
                                                 </div>
                                             </div>
@@ -124,7 +160,9 @@ const History = () => {
                                 </div>
                                 <h4>Productos</h4>
                                 <div className="col-lg-12">
-                                    <ProductPurchase />
+                                    {products ? products.map((item) => (
+                                        <ProductPurchase data={item} />
+                                    )) : console.log(products)}
                                 </div>
                                 <h4>Resumen del pedido</h4>
                                 <div className="col-lg-12">
@@ -133,16 +171,16 @@ const History = () => {
                                             <div className="col-lg-12 d-flex flex-row">
                                                 <div className="m-2 row">
                                                     <span>
-                                                        <b>Productos:</b> <span>$369.00</span>
+                                                        <b>Productos:</b> <span>${purchaseSelectedInfo.totalAmount}</span>
                                                     </span>
                                                     <span>
                                                         <b>Emvio:</b> <span>$0.00</span>
                                                     </span>
                                                     <span>
-                                                        <b>Subtotal:</b> <span>$369.00</span>
+                                                        <b>Subtotal:</b> <span>${purchaseSelectedInfo.totalAmount}</span>
                                                     </span>
                                                     <span>
-                                                        <b>Total (IVA incluido, en caso de ser aplicable):</b> <span>$369.00</span>
+                                                        <b>Total (IVA incluido, en caso de ser aplicable):</b> <span>${purchaseSelectedInfo.totalAmount}</span>
                                                     </span>
                                                 </div>
                                             </div>

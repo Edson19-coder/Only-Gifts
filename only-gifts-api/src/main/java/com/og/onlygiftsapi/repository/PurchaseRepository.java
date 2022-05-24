@@ -9,10 +9,14 @@ import com.og.onlygiftsapi.db.domain.request.PurchaseRequest;
 
 @Repository
 public interface PurchaseRepository {
-	List<?> addPurchase(PurchaseRequest request);
+	Integer addPurchase(PurchaseRequest request);
 	Boolean editPurchase(PurchaseRequest request);
 	Boolean addPurchaseItem(PurchaseItemRequest request);
 	
-	List<?> getPurchase(PurchaseRequest request);
-	List<?> getPurchases(PurchaseRequest request);
+	List<?> getPurchasesByUser(PurchaseRequest request);
+	List<?> getPurchasesByManager();
+	List<?> getPurchasesByManagerHistory();
+	Object getPurchase(PurchaseRequest request);
+	Object getPurchaseDetail(PurchaseRequest request);
+	List<?> getPurchaseItems(PurchaseRequest request);
 }

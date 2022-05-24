@@ -27,6 +27,7 @@ const Login = () => {
         localStorage.setItem("email", response.data.email);
         localStorage.setItem("role", response.data.role);
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("shoppingCartId", response.data.shoppingCartId);
         window.location = '/';
       } else {
         createNotification(204,'Correo o contraseña incorrecta.')
@@ -68,11 +69,6 @@ const Login = () => {
               </InputGroup>
 
               <a href="/register" id="registerAccount">Registrarse</a>
-
-              <div className="formControl">
-                <p className="softText" >¿Olvidaste tu contraseña?</p>
-                <a href='#' id="resetPassword">Restablecer la contraseña</a>
-              </div>
 
             </Form>
             
