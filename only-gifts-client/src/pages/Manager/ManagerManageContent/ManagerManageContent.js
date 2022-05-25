@@ -3,6 +3,14 @@ import swal from 'sweetalert';
 import sampleData from "./exampleData";
 import SideNavBar from '../../../components/SideNavBar/SideNavBar';
 import { createNotification } from "../../../services/notifications";
+import {
+  ref,
+  uploadBytes,
+  getStorage,
+  getDownloadURL,
+  listAll,
+  list,
+} from "firebase/storage";
 
 import { FaFeatherAlt, FaCircle } from "react-icons/fa";
 import { IoIosAddCircle } from "react-icons/io";
@@ -16,6 +24,8 @@ const ManagerManageContent = () => {
 
   const [modal, setModal] = useState(false)
   const [products, setProduct] = useState([]);
+  const [imageUpload, setImageUpload] = useState(null);
+  const [imageUrls, setImageUrls] = useState([]);
 
   useEffect(() => {
 
@@ -31,35 +41,46 @@ const ManagerManageContent = () => {
 
   }, [products])
 
+  const uploadFile = async () => {
+    if (imageUpload == null) {
+      createNotification(204, "¡Selecciona una imagen!", false, "");
+      return;
+    };
+    const storage = getStorage();
+    const imageRef = ref(storage, `productos/${new Date().getTime()}-${imageUpload.name}`);
+    uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        setImageUrls((prev) => [...prev, url]);
+        createNotification(200, "Imagen seleccionada correctamente.", false, "");
+      });
+    });
+  };
 
   const createProduct = async () => {
     var productCharacteristics = document.getElementById("characteristic").value;
-    var productData = {
-      name: document.getElementById("name").value,
-      description: document.getElementById("description").value,
-      characteristic: productCharacteristics.split("\n").join(""),
-      price: document.getElementById("price").value,
-      categoryId: parseInt(document.getElementById("categorySelect").value),
-      customImage: document.getElementById('flexSwitchCheckDefault').checked ? 1 : 0,
-      image: "default.jpg"
-    };
+    if (imageUrls.length != 0) {
+      var productData = {
+        name: document.getElementById("name").value,
+        description: document.getElementById("description").value,
+        characteristic: productCharacteristics.split("\n").join(""),
+        price: document.getElementById("price").value,
+        categoryId: parseInt(document.getElementById("categorySelect").value),
+        customImage: document.getElementById('flexSwitchCheckDefault').checked ? 1 : 0,
+        image: imageUrls[0]
+      };
 
-    await addProduct(productData, token).then(async (response) => {
-      if (response.status === 201 && response.data !== undefined) {
-        var formData = new FormData();
-        const imagefile = document.getElementById("formFileSm");
-        formData.append("image", imagefile.files[0]);
-        formData.append("productId", response.data);
-        await uploadImage(formData, token).then((response) => {
-          if (response.status === 200) {
-            createNotification(200, "Producto creado correctamente.", false, "");
-            setModal(false)
-          } else {
-            createNotification(500, "No se pudo crear el producto correctamente.", false, "");
-          }
-        });
-      }
-    });
+      await addProduct(productData, token).then(async (response) => {
+        if (response.status === 201 && response.data !== undefined) {
+          createNotification(200, "Producto creado correctamente.", false, "");
+          setImageUrls([]);
+          setModal(false)
+        } else {
+          createNotification(500, "No se pudo crear el producto correctamente.", false, "");
+        }
+      });
+    } else {
+      createNotification(204, "¡Selecciona una imagen!", false, "");
+    }
   };
 
   const dProduct = async (e) => {
@@ -77,8 +98,8 @@ const ManagerManageContent = () => {
           productId: parseInt(productId)
         };
         dropProduct(productData, token).then((response) => {
-          if(response.status === 200) {
-            createNotification(200,"Producto borrado correctamente.",false, "/manager/content");
+          if (response.status === 200) {
+            createNotification(200, "Producto borrado correctamente.", false, "/manager/content");
           }
         });
       }
@@ -93,7 +114,7 @@ const ManagerManageContent = () => {
       productId: parseInt(productId),
       status: status === 'A' ? 'D' : 'A'
     };
-    await changeStatusProduct(productData,token).then((response) => {
+    await changeStatusProduct(productData, token).then((response) => {
       console.log(response.status);
     });
   };
@@ -191,11 +212,16 @@ const ManagerManageContent = () => {
                       <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
                       <label className="form-check-label" for="flexSwitchCheckDefault">Imagen personalizada</label>
                     </div>
+
                   </div>
 
                   <div className="col-12 col-md-6">
                     <label htmlFor="caracteristicas" className="form-label" >Imagen</label>
-                    <input type="file" style={{ resize: "none" }} className="form-control " id='formFileSm' />
+                    <input type="file" style={{ resize: "none" }} className="form-control " id='formFileSm' onChange={(event) => { setImageUpload(event.target.files[0]); }} />
+
+                    <div className="col-12" style={{ margin: ".8rem 0rem" }}>
+                      <button type="button" className="btn btn-success" onClick={() => { uploadFile() }}>Guardar Imagen </button>
+                    </div>
                   </div>
 
                 </div>

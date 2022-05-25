@@ -63,7 +63,7 @@ const ProductItem = () => {
                 <Carousel.Item interval={1000}>
                   <img
                     className="d-block w-100"
-                    src={GLOBAL.url + "/get-image-product/" + productId + "/" + product.image}
+                    src={product.image}
                     style={{objectFit: "contain", height: "680px"}}
                   />
                 </Carousel.Item>
@@ -95,7 +95,7 @@ const ProductItem = () => {
                 </table>
               </div>
             </div>
-            {product.description ? (
+            {product.customImage != 0 ? (
               <div>
                 <h5>Personalizacion:</h5>
                 <Table striped bordered hover responsive="xl">
