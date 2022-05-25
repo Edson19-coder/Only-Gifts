@@ -1,3 +1,0 @@
-spring.datasource.url: jdbc:${SERVER_PORT}
-spring.datasource.username: ${SERVER_PORT}
-spring.datasource.password: ${SERVER_PORT}
