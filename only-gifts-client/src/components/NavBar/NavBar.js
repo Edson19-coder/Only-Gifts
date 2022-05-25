@@ -85,7 +85,7 @@ function UserLoged() {
 
 function signOut() {
     localStorage.clear();
-    window.location.reload();
+    window.location = '/';
 }
 
 export default NavBar;
