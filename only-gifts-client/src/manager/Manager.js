@@ -17,6 +17,7 @@ import ManagerAjustes from "../pages/Manager/ManagerAjustes/ManagerAjustes";
 import ManagerManageContent from "../pages/Manager/ManagerManageContent/ManagerManageContent";
 import ManagerVentas from "../pages/Manager/ManagerVentas/ManagerVentas";
 import ManagerManagePurchases from "../pages/Manager/ManagerManagePurchases/ManagerManagePurchases";
+import ManagerDocumentation from "../pages/Manager/ManagerDocument/ManagerDocumentation";
 
 const Manager = () => {
 
@@ -32,6 +33,7 @@ const Manager = () => {
                     <Route path="content" element={<PrivateRouteAdmin > <ManagerManageContent/> </PrivateRouteAdmin>} />
                     <Route path="purchases" element={<PrivateRouteAdmin > <ManagerManagePurchases/> </PrivateRouteAdmin>} />
                     <Route path="ventas" element={<PrivateRouteAdmin > <ManagerVentas/> </PrivateRouteAdmin>} />
+                    <Route path="documentation" element={<PrivateRouteAdmin > <ManagerDocumentation/> </PrivateRouteAdmin>} />
                 </Route>
             </Routes>
         </AdminProvider>

@@ -1,15 +1,50 @@
-plugins {
-	id 'org.springframework.boot' version '2.6.3'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+buildscript {
+	ext {
+		springBootVersion = '2.1.6.RELEASE'
+	}
+	repositories {
+		maven { url "https://repo.spring.io/milestone" } // SpringRepo
+		maven { url "https://plugins.gradle.org/m2/" }
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath "gradle.plugin.com.github.viswaramamoorthy:gradle-util-plugins:0.1.0-RELEASE"
+	}
 }
+plugins {
+	id 'org.springframework.boot' version '2.3.4.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+	id "org.sonarqube" version "2.7"
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: "com.github.ManifestClasspath"
 
 group = 'com.og'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	maven { url "https://plugins.gradle.org/m2/" }
+}
+ext {
+	springBootAdminVersion = '2.1.6'
+	springCloudVersion = 'Hoxton.RELEASE'
+}
+
+springBoot {
+    buildInfo()
+    mainClassName = 'com.og.onlygiftsapi.OnlyGiftsApiApplication'
+}
+
+bootRun {
+    systemProperties System.properties
 }
 
 dependencies {
@@ -24,7 +59,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 	
-	compileOnly 'org.projectlombok:lombok:1.18.22'
+	implementation 'org.projectlombok:lombok:1.18.4'
+   	compileOnly group: 'org.projectlombok', name: 'lombok', version:'1.16.20'
+   	annotationProcessor 'org.projectlombok:lombok:1.16.20'
 	
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

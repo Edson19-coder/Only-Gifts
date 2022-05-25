@@ -72,7 +72,7 @@ export default class PaymentForm extends React.Component {
             };
             addCard(card, token).then((response) => {
                 if (response.status === 201) {
-                    createNotification(200, "Tarjeta agregada correctamente.", false, "");
+                    createNotification(200, "Tarjeta agregada correctamente.", true, "/payment-method");
                 }
             });
         } else {

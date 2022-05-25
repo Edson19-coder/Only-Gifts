@@ -54,10 +54,10 @@ const SideNavBar = ({children}) => {
                 <div className="div-nav-btn text-gray" >General</div> :
                 <div className="m-0 hr" ></div>
               }
-              <div className={`nav-btn text-gray rounded-3 decorate-none  ${expand ? "text-center" :"" } ` }>
+              <Link to="/manager/documentation" className={`nav-btn text-gray rounded-3 decorate-none  ${expand ? "text-center" :"" } ` }>
                 <HiDocumentText style={{marginRight:"5px"}} />
                 {!expand && "Documentación"}
-              </div>
+              </Link>
               <div onClick={handlerSalir} className={`nav-btn text-gray rounded-3 decorate-none  ${expand ? "text-center" :"" } ` }>
                 <FA icon={faRightToBracket} style={{marginRight:"5px"}} ></FA>
                 {!expand && "Salir"}

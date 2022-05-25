@@ -67,7 +67,7 @@ const Address = () => {
         };
         await addAddress(addressData,token).then((response) => {
             if(response.status===201) {
-                createNotification(200, "Dirección agregada correctamente.", false, "");
+                createNotification(200, "Dirección agregada correctamente.", true, "/address");
                 setModal(false);
             }
         })

@@ -21,11 +21,16 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-@Api("V1 Creación de usuarios.")
+@Api("V1 Creacion de usuarios.")
 public class UserController {
 
 	@Autowired 
 	UserService userService;
+	
+	@GetMapping(value = "/", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public String init() {
+		return "working!";
+	}
 	
 	@PostMapping(value = Endpoint.CREATE_USER, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "User", notes = "Metodo para crear un usuario.")
@@ -35,7 +40,7 @@ public class UserController {
 	}
 	
 	@PostMapping(value = Endpoint.SIGN_IN_USER, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiOperation(value = "User", notes = "Metodo para iniciar sesión con un usuario.")
+    @ApiOperation(value = "User", notes = "Metodo para iniciar sesion con un usuario.")
 	public ResponseEntity<?> signInUser(@RequestBody UserSignInRequest request) {
 		log.info("Get user by email and password.");
 		return userService.getUserByEmail(request);

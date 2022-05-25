@@ -1,4 +1,4 @@
 export var GLOBAL = {
-	url: 'http://localhost:8080/api'
+	url: 'https://only-gifts-api.herokuapp.com/api'
 }
 

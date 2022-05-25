@@ -1,5 +1,6 @@
 package com.og.onlygiftsapi.config;
 
+import java.time.Duration;
 import java.util.Arrays;
 
 import org.springframework.context.annotation.Bean;
@@ -21,13 +22,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	static CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.applyPermitDefaultValues();
-		configuration.setAllowedMethods(Arrays.asList("GET","POST","DELETE","PUT", "OPTIONS", "HEAD", "PATCH"));
-		configuration.setAllowCredentials(false);
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-
-		source.registerCorsConfiguration("/**", configuration);
-
+        configuration.setAllowedHeaders(Arrays.asList("Origin,Aconfigurationept", "X-Requested-With", "Content-Type", "Aconfigurationess-Control-Request-Method", "Aconfigurationess-Control-Request-Headers","Authorization"));
+        configuration.setExposedHeaders(Arrays.asList("Aconfigurationess-Control-Allow-Origin", "Aconfigurationess-Control-Allow-Credentials"));                
+        configuration.setAllowedOrigins(Arrays.asList("/*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "PUT","PATCH"));
+        configuration.addAllowedOrigin("*");
+        configuration.setMaxAge(Duration.ZERO);
+        configuration.setAllowCredentials(Boolean.TRUE);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+		
 		return source;
 	}
 	
@@ -44,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.authorizeRequests()
 		.antMatchers
 		(
+			"/",
 			"/api/user", 
 			"/api/user/SignIn",
 			"/api/get-product",

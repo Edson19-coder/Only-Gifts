@@ -1,0 +1,4 @@
+spring.datasource.url:jdbc:mysql://mysql-only-gifts.alwaysdata.net:3306/only-gifts_only-gifts-db
+spring.datasource.username:270430_og_root
+spring.datasource.password:Solido20!
+spring.datasource.driverClassName = com.mysql.cj.jdbc.Driver

@@ -1,0 +1,4 @@
+server.port=${SERVER_PORT}
+spring.datasource.url=jdbc:${JAWSDB_URL}
+spring.datasource.username=${USERNAME_JAWSDB}
+spring.datasource.password=${PASS_JAWSDB}

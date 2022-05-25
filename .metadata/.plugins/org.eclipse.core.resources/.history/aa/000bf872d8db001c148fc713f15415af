@@ -1,0 +1,3 @@
+spring.datasource.url: jdbc:mysql://process.env.DB_HOST/process.env.DB_NAME
+spring.datasource.username: process.env.DB_USER
+spring.datasource.password: process.env.DB_PASS

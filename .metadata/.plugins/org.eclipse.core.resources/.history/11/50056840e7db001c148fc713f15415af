@@ -1,0 +1,3 @@
+spring.datasource.url:jdbc:mysql://localhost:3306/only-gifts-db
+spring.datasource.username:root
+spring.datasource.password:""

@@ -60,7 +60,7 @@ const Home = () => {
 
         <div id="productsContainer">
           <br />
-          <h1>Productos más nuevos</h1>
+          <h1>Productos</h1>
           <hr />
 
           <Row id="products">
