@@ -7,16 +7,15 @@ import {
   Route
 } from "react-router-dom";
 
-import Home from './pages/Home/Home';
-import Login from './pages/Login/Login';
-import Register from './pages/Register/Register';
-import ProductItem from './pages/ProductItem/ProductItem';
-import Manager from './manager/Manager';
-import NavBar from './components/NavBar/NavBar';
-import PaymentMethod from './pages/PaymentMethod/PaymentMethod';
-import Address from './pages/Address/Address';
-import History from './pages/History/History';
-import ShoppingCart from './pages/ShoppingCart/ShoppingCart';
+import Home from './pages/Home/Home.js';
+import Login from './pages/Login/Login.js';
+import Register from './pages/Register/Register.js';
+import ProductItem from './pages/ProductItem/ProductItem.js';
+import Manager from './manager/Manager.js';
+import PaymentMethod from './pages/PaymentMethod/PaymentMethod.js';
+import Address from './pages/Address/Address.js';
+import History from './pages/History/History.js';
+import ShoppingCart from './pages/ShoppingCart/ShoppingCart.js';
 
 function App() {
   return (
@@ -31,7 +30,7 @@ function App() {
           <Route path="/orders-history" element={<History />} />
           <Route path="/cart" element={<ShoppingCart></ShoppingCart>} />
           {/* Manager */}
-          <Route path="manager/*" element={<Manager />} />
+          <Route path="/manager/*" element={<Manager />} />
         </Routes>
       </BrowserRouter>
   );
