@@ -66,22 +66,22 @@ const ManagerManagePurchases = () => {
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
-              }).then((result) => {
+            }).then((result) => {
                 if (result) {
                     updatePurchase({ purchaseId: purchaseSelected, status: "C" }, token).then((response) => {
-                        if(response.status === 200) {
+                        if (response.status === 200) {
                             window.location = '/manager/purchases';
                         }
                     });
                 }
-              })
+            })
         }
     }
 
     const changeStatus = (e) => {
         purchaseSelected = e.target.getAttribute("data-purchaseid");
-        updatePurchase({purchaseId: purchaseSelected,status:e.target.value},token).then((response) => {
-            if(response.status === 200)  {
+        updatePurchase({ purchaseId: purchaseSelected, status: e.target.value }, token).then((response) => {
+            if (response.status === 200) {
                 window.location = '/manager/purchases';
             }
         })
@@ -160,7 +160,11 @@ const ManagerManagePurchases = () => {
                                             <div className="col-lg-12 d-flex flex-row">
                                                 <div className="m-2 row">
                                                     <span>
-                                                        <img src="https://www.freepnglogos.com/uploads/visa-inc-logo-png-11.png" className="visa" alt="" style={{ marginRight: "1rem", width: "4rem", height: "1.5rem" }} />
+                                                        {purchaseSelectedInfo.method == 'visa' ? (
+                                                            <img src="https://www.freepnglogos.com/uploads/visa-inc-logo-png-11.png" className="visa" alt="" style={{ marginRight: "1rem", width: "4rem", height: "1.5rem" }} />
+                                                        ) : (
+                                                            <img src="https://www.freepnglogos.com/uploads/mastercard-png/mastercard-logo-png-transparent-svg-vector-bie-supply-0.png" className="mastercard" alt="" style={{ marginRight: "1rem", width: "3.8rem", height: "2.8rem" }} />
+                                                        )}
                                                         <span>**** **** **** {purchaseSelectedInfo.cardNumber}</span>
                                                     </span>
                                                 </div>

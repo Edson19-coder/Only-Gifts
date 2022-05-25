@@ -165,7 +165,7 @@ const ShoppingCart = () => {
       userId: userId,
       addressId: addressSelected,
       paymentMethodId: cardSelected,
-      totalAmount:pps
+      totalAmount:pps.toFixed(2)
     };
 
     addPurchase(purchaseData,token).then((response) => {
@@ -220,7 +220,7 @@ const ShoppingCart = () => {
               <div class=" row col-lg-12 mt-0  ">
                 <div className="first m-3  d-flex  flex-row  col-lg-12">
                   <span className='col-lg-7'>Precio total del carrito:</span>
-                  <span className='col-lg-5 text-end'>${pps}</span>
+                  <span className='col-lg-5 text-end'>${pps.toFixed(2)}</span>
 
                 </div>
                 <div className="second m-3   d-flex  flex-row  col-lg-12">
@@ -403,7 +403,11 @@ const ShoppingCart = () => {
                           <div class="col-lg-12 d-flex flex-row">
                             <div class="m-2 row">
                               <span>
-                                <img src="https://www.freepnglogos.com/uploads/visa-inc-logo-png-11.png" className="visa" alt="" style={{ marginRight: "1rem" }} />
+                                {cardSelectedInfo.method == 'visa' ? (
+                                  <img src="https://www.freepnglogos.com/uploads/visa-inc-logo-png-11.png" className="visa" alt="" style={{ marginRight: "1rem", width: "4rem", height: "1.5rem" }} />
+                                ) : (
+                                  <img src="https://www.freepnglogos.com/uploads/mastercard-png/mastercard-logo-png-transparent-svg-vector-bie-supply-0.png" className="mastercard" alt="" style={{ marginRight: "1rem", width: "3.8rem", height: "2.8rem" }} />
+                                )}
                                 <span>**** **** **** {cardSelectedInfo.cardNumberPublic}</span>
                               </span>
                             </div>
@@ -419,16 +423,16 @@ const ShoppingCart = () => {
                           <div class="col-lg-12 d-flex flex-row">
                             <div class="m-2 row">
                               <span>
-                                Productos: <span>${pps}</span>
+                                Productos: <span>${pps.toFixed(2)}</span>
                               </span>
                               <span>
                                 Emvio: <span>$0.00</span>
                               </span>
                               <span>
-                                Subtotal: <span>${pps}</span>
+                                Subtotal: <span>${pps.toFixed(2)}</span>
                               </span>
                               <span>
-                                Total (IVA incluido, en caso de ser aplicable): <span>${pps}</span>
+                                Total (IVA incluido, en caso de ser aplicable): <span>${pps.toFixed(2)}</span>
                               </span>
                             </div>
                           </div>

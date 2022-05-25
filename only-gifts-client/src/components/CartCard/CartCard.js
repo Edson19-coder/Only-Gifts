@@ -8,7 +8,7 @@ function CartCard(props) {
   return (
     <div class=" row col-lg-12 mt-0 backcolorcart border border-white mx-auto ">
       <div className=" col-lg-5 d-flex">
-        <img className="my-auto align-items-start" src={GLOBAL.url + "/get-image-product/" + props.data.productId + "/" + props.data.imageUrl} style={{ objectFit: "initial", height: "90px", width: "90px" }} />
+        <img className="my-auto align-items-start" src={props.data.imageUrl} style={{ objectFit: "initial", height: "90px", width: "90px" }} />
 
         <div className="m-2 " style={{ paddingLeft: "10px" }}>
           <div className="row">
