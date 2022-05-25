@@ -2,8 +2,11 @@ import React, { useCallback, useState, useEffect } from 'react'
 import 'react-credit-cards/es/styles-compiled.css';
 import PaymentMethodCard from '../../components/PaymentMethodCard/PaymentMethodCard';
 import NavBar from "../../components/NavBar/NavBar";
+import $ from 'jquery';
+import { createNotification } from '../../services/notifications';
+import swal from 'sweetalert';
 
-import { getCard } from '../../api/CardAPI';
+import { dropCard, getCard } from '../../api/CardAPI';
 import PaymentForm from '../../components/PaymentForm/PaymentForm';
 
 var cardIdSelected = null;
@@ -15,7 +18,7 @@ const PaymentMethod = () => {
 
     useEffect(() => {
 
-        getCard({userId:userId},token).then(res => {
+        getCard({ userId: userId }, token).then(res => {
             var cards = [];
             if (res) {
                 cards = res.data.paymentMethodList;
@@ -36,6 +39,28 @@ const PaymentMethod = () => {
             document.getElementById("btnAddPaymentMethod").disabled = true;
         }
     }
+
+    $(document).on('click', '#btnRemovePaymentMethod', function () {
+        if (cardIdSelected != null) {
+            swal({
+                title: "¡Alerta!",
+                text: "¿Estas seguro que quieres eliminar la tarjeta?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((result) => {
+                if (result) {
+                    dropCard({paymentMethodsId:cardIdSelected},token).then((response) => {
+                        if(response.status === 200) {
+                            createNotification(200, "Tarjeta eliminada correctamente.", true, "/payment-method");
+                        }
+                    })
+                    console.log(cardIdSelected);
+                }
+            })
+        }
+    });
+
 
     return (
         <>
