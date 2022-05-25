@@ -11,15 +11,15 @@ span.price{
 }
 
 .product{
-    transition: .2s;
-    width: 18rem;
+    transition: transform .2s !important;
+    width: auto;
     margin: .6rem;
     box-shadow: 0px 0px 8px 0px #00000072;
 }
 
 .product:hover {
-    transition: .2s;
-    width: 19rem;
+    z-index: 1 !important;
+    transform: scale(1.1) !important;
 }
 
 .productFooter {

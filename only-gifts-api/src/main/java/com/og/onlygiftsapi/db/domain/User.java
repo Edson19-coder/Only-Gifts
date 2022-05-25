@@ -13,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="OG_USER")
+@Table(name="OG_USERS")
 public class User {
 
 	/**
@@ -45,6 +45,9 @@ public class User {
     @Column(name="PASSWORD")
     private String password;
     
+    @Column(name="ROLE")
+    private String role = "USER";
+    
     @Column(name = "ACTIVE")
     @JsonIgnore
     private Integer active;
@@ -52,7 +55,20 @@ public class User {
     public User() {
     }
     
-    public User(String firstName, String lastName, String email, String password) {
+    
+    
+    public User(Integer userId, String firstName, String lastName, String phone, String email, String role) {
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
+		this.email = email;
+		this.role = role;
+	}
+
+
+
+	public User(String firstName, String lastName, String email, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -113,6 +129,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public Integer getActive() {

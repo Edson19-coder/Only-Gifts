@@ -1,9 +1,8 @@
 #productsContainer {
-    background-color: #FDFCFD;
+    background-color: var(--main-color-white);
     padding: 1rem;
     color: #000000d0;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin: 2rem 1rem;
     width: auto;
     height: auto;
     border-radius: 6px;

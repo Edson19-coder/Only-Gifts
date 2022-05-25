@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.og.onlygiftsapi.db.domain.User;
+import com.og.onlygiftsapi.db.domain.request.UserSignInRequest;
+import com.og.onlygiftsapi.db.domain.request.UserSignUpRequest;
 import com.og.onlygiftsapi.globals.Endpoint;
 import com.og.onlygiftsapi.service.UserService;
 
@@ -19,30 +21,28 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-@Api("V1 Creación de usuarios.")
+@Api("V1 Creacion de usuarios.")
 public class UserController {
 
 	@Autowired 
 	UserService userService;
 	
+	@GetMapping(value = "/", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public String init() {
+		return "working!";
+	}
+	
 	@PostMapping(value = Endpoint.CREATE_USER, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "User", notes = "Metodo para crear un usuario.")
-	public ResponseEntity<?> createUser(@RequestBody User userRequest) {
-		User user = userService.createUser(userRequest);
-		log.info("User created successfully.");
-		return new ResponseEntity<>(user, HttpStatus.CREATED);
+	public ResponseEntity<?> createUser(@RequestBody UserSignUpRequest request) {
+		log.info("Create User.");
+		return userService.createUser(request);
 	}
 	
 	@PostMapping(value = Endpoint.SIGN_IN_USER, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiOperation(value = "User", notes = "Metodo para iniciar sesión con un usuario.")
-	public ResponseEntity<?> signInUser(@RequestBody User userRequest) {
+    @ApiOperation(value = "User", notes = "Metodo para iniciar sesion con un usuario.")
+	public ResponseEntity<?> signInUser(@RequestBody UserSignInRequest request) {
 		log.info("Get user by email and password.");
-		User user = userService.getUserByEmail(userRequest);
-		return new ResponseEntity<>(user, HttpStatus.OK);
-	}
-	
-	@GetMapping(value = "/users")
-	public String getUsers() {
-		return "Hola";
+		return userService.getUserByEmail(request);
 	}
 }

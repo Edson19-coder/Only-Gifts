@@ -3,11 +3,16 @@ package com.og.onlygiftsapi.service.impl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.og.onlygiftsapi.controller.UserController;
 import com.og.onlygiftsapi.db.domain.User;
+import com.og.onlygiftsapi.db.domain.request.UserSignInRequest;
+import com.og.onlygiftsapi.db.domain.request.UserSignUpRequest;
+import com.og.onlygiftsapi.db.domain.response.UserSignInResponse;
 import com.og.onlygiftsapi.exeptions.ResourceFoundException;
 import com.og.onlygiftsapi.exeptions.ResourceNotFoundException;
 import com.og.onlygiftsapi.repository.UserRepository;
@@ -26,42 +31,44 @@ public class UserServiceImpl implements UserService {
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
-	public User createUser(User userRequest) {
+	public ResponseEntity<?> createUser(UserSignUpRequest request) {
+		Object emailIsUsed = userRepository.getUserByEmail(request.getEmail());
 		
-		if(userRepository.findByEmail(userRequest.getEmail()).isPresent()) {
-			throw new ResourceFoundException("User", "email", userRequest.getEmail());
+		if(emailIsUsed != null) {
+			throw new ResourceFoundException("User", "email", request.getEmail());
 		}
 		
-		userRequest.setPassword(bCryptPasswordEncoder.encode(userRequest.getPassword()));
-		userRequest.setActive(1);
+		request.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
 		
-		User user = userRepository.save(userRequest);
-		return user;
+		Boolean response = userRepository.addUser(request);
+		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 
 	@Override
-	public User getUserByEmail(User userRequest) {
-		Optional<User> user = userRepository.findByEmail(userRequest.getEmail());
+	public ResponseEntity<?> getUserByEmail(UserSignInRequest request) {
+		Object user = userRepository.getUserByEmail(request.getEmail());
 		
-		if(!user.isPresent()) {
-			throw new ResourceNotFoundException("User", "email", userRequest.getEmail());
+		if(user == null) {
+			throw new ResourceNotFoundException("User", "email", request.getEmail());
 		}
 		
-		if(!bCryptPasswordEncoder.matches(userRequest.getPassword(), user.get().getPassword()))	{
-			throw new ResourceNotFoundException("User", "password", userRequest.getEmail());
+		UserSignInResponse response = new UserSignInResponse();
+		Object[] fields = (Object[]) user;
+		response.setUserId(Integer.valueOf(String.valueOf(fields[0])));
+		response.setFirstName(String.valueOf(fields[1]));
+		response.setLastName(String.valueOf(fields[2]));
+		response.setEmail(String.valueOf(fields[3]));
+		response.setRole(String.valueOf(fields[5]));
+		response.setShoppingCartId(Integer.valueOf(String.valueOf(fields[6])));
+		
+		if(!bCryptPasswordEncoder.matches(request.getPassword(), String.valueOf(fields[4]))) {
+			throw new ResourceNotFoundException("User", "password", request.getEmail());
 		}
 		
-		String token = GetJwtToken.getJWTToken(user.get().getEmail());
-		System.out.println(token);
+		String token = GetJwtToken.getJWTToken(response.getEmail(), response.getRole());
+		response.setToken(token);
 		
-		return user.get();
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
-
-	@Override
-	public Boolean isUniqueEmailUser(String email) {
-		Optional<User> user = userRepository.findByEmail(email);
-		return !user.isEmpty();
-	}
-
 
 }

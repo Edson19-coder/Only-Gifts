@@ -2,10 +2,39 @@ import React from 'react';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import logo from '../src/logo.png';
 import { MdEmail, MdPassword } from "react-icons/md";
+import { createNotification } from '../../services/notifications';
 
 import './Login.css';
 
+import { authUser } from '../../api/UserAPI';
+
 const Login = () => {
+
+  const signIn = async () => {
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+
+    var userData = {
+      email: email,
+      password: password
+  };
+
+    await authUser(userData).then((response) => {
+      if(response.status === 200) {
+        localStorage.setItem("userId", response.data.userId);
+        localStorage.setItem("firstName", response.data.firstName);
+        localStorage.setItem("lastName", response.data.lastName);
+        localStorage.setItem("email", response.data.email);
+        localStorage.setItem("role", response.data.role);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("shoppingCartId", response.data.shoppingCartId);
+        window.location = '/';
+      } else {
+        createNotification(204,'Correo o contraseña incorrecta.')
+      }
+    });
+  };
+
   return (
     <div className="container-fluid">
       <div className="container-sm items-align-center text-center col-6" id="container-global">
@@ -14,6 +43,8 @@ const Login = () => {
           alt=""
           width="150"
           height="150"
+          onClick={() => {window.location = '/'}}
+          style={{cursor:"pointer"}}
           className="d-inline-block align-text-top"/>
 
           <div className="container-sm items-align-center text-center col-12" id="container-form">
@@ -24,23 +55,20 @@ const Login = () => {
             <Form>
 
               <InputGroup className="mb-3" className="formControl">
-                <InputGroup.Text id="basic-addon1"><MdEmail/></InputGroup.Text>
-                <Form.Control size="lg" type="email" placeholder="Correo electrónico" />
+                <InputGroup.Text ><MdEmail/></InputGroup.Text>
+                <Form.Control size="lg" id='email' type="email" placeholder="Correo electrónico" />
               </InputGroup>
 
               <InputGroup className="mb-3" className="formControl">
-                <InputGroup.Text id="basic-addon1"><MdPassword/></InputGroup.Text>
-                <Form.Control size="lg" type="password" placeholder="Contraseña" />
+                <InputGroup.Text ><MdPassword/></InputGroup.Text>
+                <Form.Control size="lg" id='password' type="password" placeholder="Contraseña" />
               </InputGroup>
 
               <InputGroup size="lg" className="mb-3" className="formControl">
-                <Button id="btnSignIn">Ingresar</Button>
+                <Button id="btnSign" onClick={() => {signIn()}}>Ingresar</Button>
               </InputGroup>
 
-              <div className="formControl">
-                <p className="softText" >¿Olvidaste tu contraseña?</p>
-                <a href='#' id="resetPassword">Restablecer la contraseña</a>
-              </div>
+              <a href="/register" id="registerAccount">Registrarse</a>
 
             </Form>
             
