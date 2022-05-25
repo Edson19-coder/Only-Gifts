@@ -3,12 +3,14 @@ import NavBar from '../../components/NavBar/NavBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAdd } from '@fortawesome/free-solid-svg-icons'
 import AddressCard from '../../components/AddressCard/AddressCard'
-import { zipCodeInfo,addAddress,getAddresses } from '../../api/AddressAPI';
+import { zipCodeInfo,addAddress,getAddresses, dropAddress } from '../../api/AddressAPI';
 import { createNotification } from '../../services/notifications';
-
+import swal from 'sweetalert';
 
 var token = localStorage.getItem("token");
 var userId = localStorage.getItem("userId");
+
+var addressdIdSelected = null;
 const Address = () => {
     const [addresses, setAddress] = useState([]);
     const [modal, setModal] = useState(false)
@@ -73,6 +75,29 @@ const Address = () => {
         })
     }
 
+    const deleteAddress = (e) => {
+        addressdIdSelected = e.target.getAttribute("data-addressid");
+        if (addressdIdSelected != null) {
+
+            swal({
+                title: "¡Alerta!",
+                text: "¿Estas seguro que quieres eliminar la dirección?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              }).then((result) => {
+                if (result) {
+                    dropAddress({addressId:addressdIdSelected},token).then((response) => {
+                        if(response.status === 200) {
+                            createNotification(200, "Dirección eliminada correctamente.", true, "/address");
+                        }
+                    })
+                }
+              })
+
+        }
+    }
+
     return (
         <>
             <NavBar />
@@ -93,7 +118,7 @@ const Address = () => {
 
                         <div className="col-12" style={{ overflowY: "scroll", height: "40rem", padding: "1rem" }}>
                             {addresses ? addresses.map((item) => (
-                                <AddressCard key={item.addressId} data={item} modal={setModal2} />
+                                <AddressCard key={item.addressId} data={item} modal={setModal2} onClickDelete={deleteAddress} />
                             )) : console.log(addresses)}
                         </div>
 

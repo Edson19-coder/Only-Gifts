@@ -59,3 +59,17 @@ export const getAddress = async (address, token) => {
         return error;
     }
 }
+
+export const dropAddress = async (address, token) => {
+    try {
+        const response = await axios.post("/drop-address", address, {
+            headers: {
+                Authorization: token
+            }
+        });
+        return response;
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
+}

@@ -41,3 +41,17 @@ export const getCardById = async (card, token) => {
         return error;
     }
 }
+
+export const dropCard = async (card, token) => {
+    try {
+        const response = await axios.post("/drop-payment-method", card, {
+            headers: {
+                Authorization: token
+            }
+        });
+        return response;
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
+}

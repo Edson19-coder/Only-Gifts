@@ -22,7 +22,7 @@ const AddressCard = (props) => {
                 <a className="colorWhite btn-outline-primary zoom  btn-sm btn shadow-none m-1" type="button" onClick={() => { props.modal(true) }}>
                   <span className="m-1">Editar</span>
                 </a>
-                <a className="colorWhite btn-outline-danger zoom btn-sm btn shadow-none m-1 " type="button" >
+                <a className="colorWhite btn-outline-danger zoom btn-sm btn shadow-none m-1 " type="button" data-addressid={props.data.addressId} onClick={props.onClickDelete}>
                   <span className="m-1">Eliminar</span>
                 </a>
               </div>
