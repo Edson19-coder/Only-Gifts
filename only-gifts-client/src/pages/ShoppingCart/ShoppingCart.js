@@ -165,7 +165,7 @@ const ShoppingCart = () => {
       userId: userId,
       addressId: addressSelected,
       paymentMethodId: cardSelected,
-      totalAmount:pps.toFixed(2)
+      totalAmount:pps
     };
 
     addPurchase(purchaseData,token).then((response) => {
@@ -220,7 +220,7 @@ const ShoppingCart = () => {
               <div class=" row col-lg-12 mt-0  ">
                 <div className="first m-3  d-flex  flex-row  col-lg-12">
                   <span className='col-lg-7'>Precio total del carrito:</span>
-                  <span className='col-lg-5 text-end'>${pps.toFixed(2)}</span>
+                  <span className='col-lg-5 text-end'>${pps}</span>
 
                 </div>
                 <div className="second m-3   d-flex  flex-row  col-lg-12">
@@ -423,16 +423,16 @@ const ShoppingCart = () => {
                           <div class="col-lg-12 d-flex flex-row">
                             <div class="m-2 row">
                               <span>
-                                Productos: <span>${pps.toFixed(2)}</span>
+                                Productos: <span>${pps}</span>
                               </span>
                               <span>
                                 Emvio: <span>$0.00</span>
                               </span>
                               <span>
-                                Subtotal: <span>${pps.toFixed(2)}</span>
+                                Subtotal: <span>${pps}</span>
                               </span>
                               <span>
-                                Total (IVA incluido, en caso de ser aplicable): <span>${pps.toFixed(2)}</span>
+                                Total (IVA incluido, en caso de ser aplicable): <span>${pps}</span>
                               </span>
                             </div>
                           </div>
